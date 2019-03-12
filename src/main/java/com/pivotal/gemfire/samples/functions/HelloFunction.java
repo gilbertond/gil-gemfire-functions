@@ -1,15 +1,21 @@
 package com.pivotal.gemfire.samples.functions;
 
-import com.gemstone.gemfire.cache.execute.FunctionAdapter;
-import com.gemstone.gemfire.cache.execute.FunctionContext;
+import org.apache.geode.cache.execute.Function;
+import org.apache.geode.security.ResourcePermission;
+
+import java.util.Collection;
 
 /**
  * Created by markito on 4/29/14.
  */
-public class HelloFunction extends FunctionAdapter {
+public class HelloFunction implements Function {
+  @Override
+  public boolean hasResult() {
+    return false;
+  }
 
   @Override
-  public void execute(FunctionContext functionContext) {
+  public void execute(org.apache.geode.cache.execute.FunctionContext context) {
     System.out.println("Hello, I'm running here");
   }
 
@@ -19,7 +25,7 @@ public class HelloFunction extends FunctionAdapter {
   }
 
   @Override
-  public boolean hasResult() {
+  public boolean optimizeForWrite() {
     return false;
   }
 
@@ -27,4 +33,30 @@ public class HelloFunction extends FunctionAdapter {
   public boolean isHA() {
     return false;
   }
+
+  @Override
+  public Collection<ResourcePermission> getRequiredPermissions(String regionName) {
+    return null;
+  }
+
+//  @Override
+//  public void execute(FunctionContext functionContext) {
+//
+//    System.out.println("Hello, I'm running here");
+//  }
+
+//  @Override
+//  public String getId() {
+//    return HelloFunction.class.getCanonicalName();
+//  }
+//
+//  @Override
+//  public boolean hasResult() {
+//    return false;
+//  }
+//
+//  @Override
+//  public boolean isHA() {
+//    return false;
+//  }
 }

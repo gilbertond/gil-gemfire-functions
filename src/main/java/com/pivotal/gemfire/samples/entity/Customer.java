@@ -1,6 +1,7 @@
 package com.pivotal.gemfire.samples.entity;
 
 import com.gemstone.gemfire.management.internal.cli.util.JsonUtil;
+import org.apache.geode.cache.Declarable;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,7 +9,7 @@ import java.util.Objects;
 /**
  * Created by markito on 4/08/14.
  */
-public class Customer  implements Serializable {
+public class Customer  implements Serializable, Declarable {
 
   private Integer id;
   private String name, email;
